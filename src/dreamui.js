@@ -117,4 +117,69 @@ function DreamUI() {
             new DreamUI().closeBackhider();
         });
     }
+
+    this.ask = function (title, message, yesText,noText, onDone) {
+        var promptElement = document.createElement("div");
+        promptElement.style.zIndex = "1001";
+        promptElement.className = "dream prompt";
+        var promptTitleElement = document.createElement("div");
+        var promptMessageElement = document.createElement("div");
+        promptMessageElement.innerHTML = message;
+        promptMessageElement.classList.add("text");
+        promptTitleElement.classList.add("title");
+        promptTitleElement.innerHTML = title;
+        var promptButtonYesElement = document.createElement("button");
+        promptButtonYesElement.className = "dream button halfWidth";
+
+        promptButtonYesElement.innerHTML = yesText;
+        var promptButtonNoElement = document.createElement("button");
+        promptButtonNoElement.className = "dream button halfWidth";
+
+        promptButtonNoElement.innerHTML = noText;
+
+
+
+        var buttonContainer = document.createElement("div");
+        if (yesText == undefined) {
+            promptButtonYesElement.innerHTML = "Yes";
+        }
+        if (noText == undefined) {
+            promptButtonNoElement.innerHTML = "No";
+        }
+        promptElement.appendChild(promptTitleElement);
+
+        promptElement.appendChild(promptMessageElement);
+        promptElement.appendChild(promptButtonNoElement);
+        promptElement.appendChild(promptButtonYesElement);
+
+        
+        document.body.appendChild(promptElement);
+        var backhider;
+        backhider = this.openBackhider(function () {
+        });
+
+        setTimeout(function () {
+            promptElement.classList.add("open");
+        }, 100);
+        var ret = "";
+        promptButtonYesElement.addEventListener("click", function () {
+            if (onDone != undefined)
+                onDone(true);
+            promptElement.classList.remove("open");
+            setTimeout(function () {
+                promptElement.outerHTML = ""
+            }, 500);
+            new DreamUI().closeBackhider();
+        });
+
+        promptButtonNoElement.addEventListener("click", function () {
+            if (onDone != undefined)
+                onDone(false);
+            promptElement.classList.remove("open");
+            setTimeout(function () {
+                promptElement.outerHTML = ""
+            }, 500);
+            new DreamUI().closeBackhider();
+        });
+    }
 }

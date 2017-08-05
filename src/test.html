@@ -22,7 +22,9 @@
     document.getElementById("prompt").addEventListener("click",function(){
         ui.prompt("Merhaba","Burası bir prompt girdisi","done",function(data){
             console.log(data+" yazdın!");
-            ui.message("Merhaba","Prompt'u denediğin için teşekkür ederiz.","Okay");
+            ui.ask("Merhaba","Prompt'u denediğin için teşekkür ederiz.","Yes","No",function(data){
+                ui.message("hi",data);
+            });
         });
     });
 </script>
