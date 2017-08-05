@@ -7,16 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet/less" type="" href="dreamui.less">
-    <script src="less.js">
-        
-    </script>
+    <script src="less.js"></script>
+    <script src="dreamui.js"></script>
 </head>
 <body>
-    <button class="dream button">Click me</button>
+    <button id="prompt" class="dream button">Click me</button>
     <button class="dream button green">green</button>
     <button class="dream button red">red</button>
     <button class="dream button yellow">yellow</button>
     <button class="dream button blue">blue</button>
-
 </body>
+<script>
+    var ui = new DreamUI();
+    document.getElementById("prompt").addEventListener("click",function(){
+        ui.prompt("Merhaba","Burası bir prompt girdisi","done",function(data){
+            console.log(data+" yazdın!");
+            ui.message("Merhaba","Prompt'u denediğin için teşekkür ederiz.","Okay");
+        });
+    });
+</script>
 </html>
