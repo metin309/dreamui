@@ -12,20 +12,33 @@
 </head>
 <body>
     <button id="prompt" class="dream button">Click me</button>
-    <button class="dream button green">green</button>
+    <button id="dialogOpener" class="dream button green">green</button>
     <button class="dream button red">red</button>
     <button class="dream button yellow">yellow</button>
     <button class="dream button blue">blue</button>
+
+    <div id="dialog" class="dream dialog top">
+        <div class="title">Hello Dialog</div>
+        <div class="desc">This is a simple dialog of DreamUI</div>
+        <div class="dream buttons right">
+            <div id="closedi" class="dream button green">Okay</div>
+            <div class="dream button alert">Disagree</div>
+        </div>
+    </div>
 </body>
 <script>
     var ui = new DreamUI();
     document.getElementById("prompt").addEventListener("click",function(){
-        ui.prompt("Merhaba","Burası bir prompt girdisi","done",function(data){
+        ui.prompt({message:"Selam",buttonText:"Okay",value:"enter your text here",position:"bottom"},function(data){
             console.log(data+" yazdın!");
             ui.ask("Merhaba","Prompt'u denediğin için teşekkür ederiz.","Yes","No",function(data){
                 ui.message("hi",data);
             });
         });
+    });
+
+    document.getElementById("dialogOpener").addEventListener("click",function(){
+        ui.openDialog(document.getElementById("dialog"));
     });
 </script>
 </html>

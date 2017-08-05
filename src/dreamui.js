@@ -37,18 +37,21 @@ function DreamUI() {
     }
     //opens prompt
 
-    this.prompt = function (message, text, okayText, callback) {
+    this.prompt = function (settings, callback) {
         var promptElement = document.createElement("div");
+        if(settings.position==undefined){
+            settings.position="top";
+        }
         promptElement.style.zIndex = "1001";
-        promptElement.className = "dream prompt";
+        promptElement.className = "dream prompt "+settings.position;
         var promptMessageElement = document.createElement("div");
         var promptInputElement = document.createElement("input");
         var promptButtonElement = document.createElement("div");
-        promptMessageElement.innerHTML = message;
+        promptMessageElement.innerHTML = settings.message;
         promptMessageElement.classList.add("text");
-        promptInputElement.value = text;
+        promptInputElement.value = settings.value;
         promptButtonElement.className = "dream button fluid";
-        promptButtonElement.innerHTML = okayText;
+        promptButtonElement.innerHTML = settings.buttonText;
         promptInputElement.className = "dream input fluid";
         promptElement.appendChild(promptMessageElement);
         promptElement.appendChild(promptInputElement);
@@ -59,6 +62,9 @@ function DreamUI() {
         backhider = this.openBackhider(function () {
             promptElement.classList.remove("open");
             new DreamUI().closeBackhider(backhider);
+                        setTimeout(function () {
+                promptElement.outerHTML = "";
+            }, 500);
         });
 
         setTimeout(function () {
@@ -68,7 +74,7 @@ function DreamUI() {
         promptButtonElement.addEventListener("click", function () {
             promptElement.classList.remove("open");
             setTimeout(function () {
-                promptElement.outerHTML = ""
+                promptElement.outerHTML = "";
             }, 500);
             new DreamUI().closeBackhider();
             callback(promptInputElement.value);
@@ -182,4 +188,29 @@ function DreamUI() {
             new DreamUI().closeBackhider();
         });
     }
+
+    //dialog
+    this.openDialog = function (dialogElement) {
+        dialogElement.classList.add("open");
+        dialogElement.style.zIndex = "1001";
+
+        console.log(dialogElement.clientHeight);
+        if(!dialogElement.classList.contains("top") && !dialogElement.classList.contains("bottom") && !dialogElement.classList.contains("right") && !dialogElement.classList.contains("left"))
+        dialogElement.style.cssText += "top:calc( 50% - " + (dialogElement.clientHeight) + "px )!important;";
+        console.log(dialogElement.clientTop);
+
+        var backhider;
+        backhider = this.openBackhider(function () {
+            dialogElement.classList.remove("open");
+            new DreamUI().closeBackhider();
+        });
+    }
+    this.closeDialog = function (dialogElement) {
+        dialogElement.classList.remove("open");
+        new DreamUI().closeBackhider();
+    }
+
 }
+
+
+
