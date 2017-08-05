@@ -1,0 +1,98 @@
+/***********DEFAULT VALUES**********/
+@mainColor: #eaeaea;
+@secondaryColor:#1d00ff;
+
+
+/*key values*/
+@transitionDuration:0.4s;
+/*buttons*/
+@buttonPadding: 8px;
+@buttonRadius:2px;
+@buttonBorderStyle: solid;
+@buttonBorderWidth:1px;
+@buttonTextWeight:600;
+
+/**********COLORS**********/
+@colorNames: green,red,yellow, orange, blue, aqua;
+@colorValues:#2dfc7d,#fc2d4d,#fcc531,#e68e00,#f4f4f4, #00ceff;
+/************KEYS***************/
+.fluid {
+    width: 100%!important;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
+}
+
+.flat {
+    border-radius: 0!important;
+}
+
+.shadowless {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0)!important;
+}
+
+.disabled {
+    filter: contrast(0.2);
+}
+
+
+/*************BUTTONS*************/
+
+.dream.button {
+    width: 128px;
+    text-align: center;
+    border-radius: 2px;
+    border: 1px solid @mainColor;
+    color: #585858;
+    font-weight: @buttonTextWeight;
+    padding: @buttonPadding;
+    background-color: @mainColor;
+    box-shadow: 0px 0px 2px 0px darken(@mainColor,20%);
+    transition-duration: 0.4s;
+    cursor: default;
+}
+
+.dream.button:hover {
+    background-color: lighten(@mainColor,3%);
+    border-color: lighten(@mainColor,3%);
+    box-shadow: 0px 0px 2px 0px lighten(@mainColor,(100% - lightness(@mainColor))/2);
+}
+
+.dream.button:active {
+    background-color: darken(@mainColor,(100% - lightness(@mainColor))/2);
+    border-color: darken(@mainColor,(100% - lightness(@mainColor))/2);
+}
+
+.GenerateButtons(1);
+
+.GenerateButtons(@i) when (@i<=length(@colorNames)){
+    @curname: extract(@colorNames,@i);
+    @colVal:extract(@colorValues,@i);
+    .dream.button.@{curname}{
+        width: 128px;
+        text-align: center;
+        border-radius: 2px;
+        border: 1px solid @colVal;
+        color: #585858;
+        font-weight: @buttonTextWeight;
+        padding: @buttonPadding;
+        background-color: @colVal;
+        box-shadow: 0px 0px 2px 0px darken(@colVal,20%);
+        transition-duration: 0.4s;
+        cursor: default;
+    }
+    .dream.button.@{curname}:hover{
+        background-color: lighten(@colVal,(100% - lightness(@colVal))/2);
+        border-color: lighten(@colVal,(100% - lightness(@colVal))/2);
+        box-shadow: 0px 0px 2px 0px lighten(@colVal,(100% - lightness(@colVal))/2);
+    }
+    .dream.button.@{curname}:active{
+        background-color: darken(@colVal,(100% - lightness(@colVal))/2);
+        border-color: darken(@colVal,(100% - lightness(@colVal))/2);
+    }
+    .GenerateButtons(@i+1);
+
+}
