@@ -1,4 +1,60 @@
 function DreamUI() {
+    this.Dropdown = function () {
+        document.querySelectorAll(".dream.dropdown").forEach(function (element) {
+            var data = new Array();
+
+            data = element.querySelectorAll(".data")[0].querySelectorAll(".item");
+            console.log(element.offsetTop);
+
+            if (element.querySelector(".active") != undefined) {
+                element.querySelector(".active").innerHTML = data[0].innerHTML;
+            } else {
+                var active = document.createElement("div");
+                active.className = "active"
+                active.innerHTML = data[0].innerHTML;
+                element.appendChild(active);
+            }
+            element.addEventListener("click", function () {
+                var drop = document.createElement("div");
+                drop.className = "dream drop flat";
+                drop.style.top = (element.offsetTop + element.clientHeight + 4) + "px";
+                drop.style.left = element.offsetLeft + "px";
+
+                data.forEach(function (dataItem) {
+                    var item = document.createElement("div");
+                    item.className = "dream dropitem";
+                    item.innerHTML = dataItem.innerHTML;
+                    drop.appendChild(item);
+                    item.addEventListener("click", function () {
+                        if (element.querySelector(".active") != undefined) {
+                            element.getElementsByClassName("active")[0].innerHTML = dataItem.innerHTML;
+                        } else {
+                            var active = document.createElement("div");
+                            active.className = "active"
+
+                            active.innerHTML = dataItem.innerHTML;
+                            element.appendChild(active);
+                        }
+                    });
+
+                });
+                window.addEventListener("click", function (event) {
+                    if (!element.contains(event.target) || (event.target == element && drop.classList.contains("open"))) {
+                        drop.classList.remove("open");
+                        setTimeout(function () {
+                            drop.outerHTML = "";
+                        }, 800);
+                    }
+                });
+                document.body.appendChild(drop);
+                setTimeout(function () {
+                    drop.classList.add("open");
+                }, 100);
+            });
+        });
+    }
+
+
     this.openBackhider = function (onClick) {
         var backhider = document.createElement("div");
         if (document.getElementsByClassName("backhider").length < 0) {

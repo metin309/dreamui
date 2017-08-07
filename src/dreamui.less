@@ -363,3 +363,73 @@ aqua;
 .dream.input:focus {
     box-shadow: 0px 0px 8px 0px darken(@mainColor, 20%);
 }
+
+
+/***************DROPDOWN*****************/
+
+.dream.dropdown {
+    width: 128px;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    color: #585858;
+    font-weight: 600;
+    padding: 8px;
+    background-color: #eaeaea;
+    box-shadow: 0px 0px 2px 0px #b9b9b9;
+    transition-duration: 0.4s;
+    cursor: default;
+}
+
+.dream.dropdown:hover {
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    box-shadow: 0px 0px 2px 0px #f2f2f2;
+}
+
+.dream.dropdown:active {
+    background-color: #dfdfdf;
+    border-color: #dfdfdf;
+}
+
+.dream.drop {
+    position: absolute;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    color: #585858;
+    font-weight: 600;
+    padding: 4px 0 4px 0;
+    background-color: #eaeaea;
+    box-shadow: 0px 0px 2px 0px #b9b9b9;
+    transition-duration: 0.4s;
+    cursor: default;
+    transform: scale(0);
+    transform-origin: top left;
+    opacity: 0;
+}
+
+.dream.drop.open {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.dream.dropitem {
+    text-align: center;
+    color: #585858;
+    font-size: 12px;
+    padding: 2px;
+    background-color: #eaeaea;
+    transition-duration: 0.4s;
+    cursor: default;
+}
+
+.dream.dropitem:hover {
+    background-color: #f2f2f2;
+}
+
+.dream.dropitem:active {
+    background-color: #dfdfdf;
+}
+
+.dream.dropdown>.data {
+    display: none;
+}

@@ -27,10 +27,19 @@
             <div class="dream button alert">Disagree</div>
         </div>
     </div>
+    <div class="dream dropdown">
+        <div class="data">
+            <div class="item">Merhaba</div>
+            <div class="item">Do you love me :)</div>
+            <div class="item">I do alot :)</div>
+            <div class="item">Great ^^</div>
+        </div>
+    </div>
     <input type="text" class="dream input">
 </body>
 <script>
     var ui = new DreamUI();
+    ui.Dropdown();
     document.getElementById("prompt").addEventListener("click", function() {
         ui.prompt({
             message: "Selam",
