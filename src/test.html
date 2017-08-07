@@ -1,6 +1,7 @@
 <!--THIS FILE WAS CREATED FOR TESTING DREAM UI-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <script src="less.js"></script>
     <script src="dreamui.js"></script>
 </head>
+
 <body>
     <button id="prompt" class="dream button">Click me</button>
     <button id="dialogOpener" class="dream button green">green</button>
@@ -28,17 +30,33 @@
 </body>
 <script>
     var ui = new DreamUI();
-    document.getElementById("prompt").addEventListener("click",function(){
-        ui.prompt({message:"Selam",buttonText:"Okay",value:"enter your text here",position:"bottom"},function(data){
-            console.log(data+" yazdın!");
-            ui.ask("Merhaba","Prompt'u denediğin için teşekkür ederiz.","Yes","No",function(data){
-                ui.message("hi",data);
-            });
+    document.getElementById("prompt").addEventListener("click", function() {
+        ui.prompt({
+            message: "Selam",
+            buttonText: "Okay",
+            value: "enter your text here",
+            position: "bottom"
+        }, function(data) {
+            console.log(data + " yazdın!");
+            ui.ask({
+                    title: "Merhaba",
+                    message: "Prompt'u denediğin için teşekkür ederiz.",
+                    yesButtonText: "Yes",
+                    noButtonText: "No"
+                },
+                function(data) {
+                    ui.message({
+                        title: "Merhaba",
+                        message: "Başarılı!"
+                    });
+                });
         });
     });
 
-    document.getElementById("dialogOpener").addEventListener("click",function(){
+    document.getElementById("dialogOpener").addEventListener("click", function() {
         ui.openDialog(document.getElementById("dialog"));
     });
+
 </script>
+
 </html>

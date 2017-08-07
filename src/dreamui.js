@@ -22,8 +22,9 @@ function DreamUI() {
     this.closeBackhider = function (backhider) {
         if (backhider == undefined) {
             if (document.getElementsByClassName("backhider")[0] != undefined) {
-                document.getElementsByClassName("backhider")[0].classList.remove("open");
-
+                document.querySelectorAll(".backhider").forEach(function (backhider) {
+                    backhider.classList.remove("open");
+                });
                 setTimeout(function () {
                     document.getElementsByClassName("backhider")[0].outerHTML = "";
                 }, 800);
@@ -39,11 +40,11 @@ function DreamUI() {
 
     this.prompt = function (settings, callback) {
         var promptElement = document.createElement("div");
-        if(settings.position==undefined){
-            settings.position="top";
+        if (settings.position == undefined) {
+            settings.position = "top";
         }
         promptElement.style.zIndex = "1001";
-        promptElement.className = "dream prompt "+settings.position;
+        promptElement.className = "dream prompt " + settings.position;
         var promptMessageElement = document.createElement("div");
         var promptInputElement = document.createElement("input");
         var promptButtonElement = document.createElement("div");
@@ -62,7 +63,7 @@ function DreamUI() {
         backhider = this.openBackhider(function () {
             promptElement.classList.remove("open");
             new DreamUI().closeBackhider(backhider);
-                        setTimeout(function () {
+            setTimeout(function () {
                 promptElement.outerHTML = "";
             }, 500);
         });
@@ -81,20 +82,23 @@ function DreamUI() {
         });
     }
 
-    this.message = function (title, message, okayText, onDone) {
+    this.message = function (settings, onDone) {
         var promptElement = document.createElement("div");
+        if (settings.position == undefined) {
+            settings.position = "top";
+        }
         promptElement.style.zIndex = "1001";
-        promptElement.className = "dream prompt";
+        promptElement.className = "dream message " + settings.position;
         var promptTitleElement = document.createElement("div");
         var promptMessageElement = document.createElement("div");
         var promptButtonElement = document.createElement("div");
-        promptMessageElement.innerHTML = message;
+        promptMessageElement.innerHTML = settings.message;
         promptMessageElement.classList.add("text");
         promptTitleElement.classList.add("title");
-        promptTitleElement.innerHTML = title;
+        promptTitleElement.innerHTML = settings.title;
         promptButtonElement.className = "dream button fluid";
-        promptButtonElement.innerHTML = okayText;
-        if (okayText == undefined) {
+        promptButtonElement.innerHTML = settings.buttonText;
+        if (settings.buttonText == undefined) {
             promptButtonElement.innerHTML = "Okay";
         }
         promptElement.appendChild(promptTitleElement);
@@ -124,32 +128,35 @@ function DreamUI() {
         });
     }
 
-    this.ask = function (title, message, yesText,noText, onDone) {
+    this.ask = function (settings, onDone) {
         var promptElement = document.createElement("div");
+        if (settings.position == undefined) {
+            settings.position = "top";
+        }
         promptElement.style.zIndex = "1001";
-        promptElement.className = "dream prompt";
+        promptElement.className = "dream prompt " + settings.position;
         var promptTitleElement = document.createElement("div");
         var promptMessageElement = document.createElement("div");
-        promptMessageElement.innerHTML = message;
+        promptMessageElement.innerHTML = settings.message;
         promptMessageElement.classList.add("text");
         promptTitleElement.classList.add("title");
-        promptTitleElement.innerHTML = title;
+        promptTitleElement.innerHTML = settings.title;
         var promptButtonYesElement = document.createElement("button");
         promptButtonYesElement.className = "dream button halfWidth";
 
-        promptButtonYesElement.innerHTML = yesText;
+        promptButtonYesElement.innerHTML = settings.yesButtonText;
         var promptButtonNoElement = document.createElement("button");
         promptButtonNoElement.className = "dream button halfWidth";
 
-        promptButtonNoElement.innerHTML = noText;
+        promptButtonNoElement.innerHTML = settings.noButtonText;
 
 
 
         var buttonContainer = document.createElement("div");
-        if (yesText == undefined) {
+        if (settings.yesButtonText == undefined) {
             promptButtonYesElement.innerHTML = "Yes";
         }
-        if (noText == undefined) {
+        if (settings.noButtonText == undefined) {
             promptButtonNoElement.innerHTML = "No";
         }
         promptElement.appendChild(promptTitleElement);
@@ -158,11 +165,10 @@ function DreamUI() {
         promptElement.appendChild(promptButtonNoElement);
         promptElement.appendChild(promptButtonYesElement);
 
-        
+
         document.body.appendChild(promptElement);
         var backhider;
-        backhider = this.openBackhider(function () {
-        });
+        backhider = this.openBackhider(function () {});
 
         setTimeout(function () {
             promptElement.classList.add("open");
@@ -195,8 +201,8 @@ function DreamUI() {
         dialogElement.style.zIndex = "1001";
 
         console.log(dialogElement.clientHeight);
-        if(!dialogElement.classList.contains("top") && !dialogElement.classList.contains("bottom") && !dialogElement.classList.contains("right") && !dialogElement.classList.contains("left"))
-        dialogElement.style.cssText += "top:calc( 50% - " + (dialogElement.clientHeight) + "px )!important;";
+        if (!dialogElement.classList.contains("top") && !dialogElement.classList.contains("bottom") && !dialogElement.classList.contains("right") && !dialogElement.classList.contains("left"))
+            dialogElement.style.cssText += "top:calc( 50% - " + (dialogElement.clientHeight) + "px )!important;";
         console.log(dialogElement.clientTop);
 
         var backhider;
@@ -211,6 +217,3 @@ function DreamUI() {
     }
 
 }
-
-
-

@@ -1,33 +1,51 @@
 /***********DEFAULT VALUES**********/
-@mainColor: #eaeaea;
-@secondaryColor:#1d00ff;
 
+@mainColor: #eaeaea;
+@secondaryColor: #1d00ff;
 
 /*key values*/
-@transitionDuration:0.4s;
+
+@transitionDuration: 0.4s;
+
 /*buttons*/
+
 @buttonPadding: 8px;
-@buttonRadius:2px;
+@buttonRadius: 2px;
 @buttonBorderStyle: solid;
-@buttonBorderWidth:1px;
-@buttonTextWeight:600;
+@buttonBorderWidth: 1px;
+@buttonTextWeight: 600;
 
 /**********COLORS**********/
-@colorNames: green,red,yellow, orange, blue, aqua;
-@colorValues:#2dfc7d,#fc2d4d,#fcc531,#e68e00,#f4f4f4, #00ceff;
+
+@colorNames: green,
+red,
+yellow,
+orange,
+blue,
+aqua;
+@colorValues: #2dfc7d,
+#fc2d4d,
+#fcc531,
+#e68e00,
+#f4f4f4,
+#00ceff;
+
 /************KEYS***************/
+
 .fluid {
     width: 100%!important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.halfWidth{
-    width:50%!important;
+
+.halfWidth {
+    width: 50%!important;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .flat {
     border-radius: 0!important;
 }
@@ -52,12 +70,10 @@
     font-weight: @buttonTextWeight;
     padding: @buttonPadding;
     background-color: @mainColor;
-    box-shadow: 0px 0px 2px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 2px 0px darken(@mainColor, 20%);
     transition-duration: 0.4s;
     cursor: default;
-
-
-        -webkit-touch-callout: none;
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -66,22 +82,21 @@
 }
 
 .dream.button:hover {
-    background-color: lighten(@mainColor,3%);
-    border-color: lighten(@mainColor,3%);
-    box-shadow: 0px 0px 2px 0px lighten(@mainColor,(100% - lightness(@mainColor))/2);
+    background-color: lighten(@mainColor, 3%);
+    border-color: lighten(@mainColor, 3%);
+    box-shadow: 0px 0px 2px 0px lighten(@mainColor, (100% - lightness(@mainColor))/2);
 }
 
 .dream.button:active {
-    background-color: darken(@mainColor,(100% - lightness(@mainColor))/2);
-    border-color: darken(@mainColor,(100% - lightness(@mainColor))/2);
+    background-color: darken(@mainColor, (100% - lightness(@mainColor))/2);
+    border-color: darken(@mainColor, (100% - lightness(@mainColor))/2);
 }
 
 .GenerateButtons(1);
-
-.GenerateButtons(@i) when (@i<=length(@colorNames)){
-    @curname: extract(@colorNames,@i);
-    @colVal:extract(@colorValues,@i);
-    .dream.button.@{curname}{
+.GenerateButtons(@i) when (@i<=length(@colorNames)) {
+    @curname: extract(@colorNames, @i);
+    @colVal: extract(@colorValues, @i);
+    .dream.button.@{curname} {
         width: 128px;
         text-align: center;
         border-radius: 2px;
@@ -90,40 +105,45 @@
         font-weight: @buttonTextWeight;
         padding: @buttonPadding;
         background-color: @colVal;
-        box-shadow: 0px 0px 2px 0px darken(@colVal,20%);
+        box-shadow: 0px 0px 2px 0px darken(@colVal, 20%);
         transition-duration: 0.4s;
         cursor: default;
     }
-    .dream.button.@{curname}:hover{
-        background-color: lighten(@colVal,(100% - lightness(@colVal))/2);
-        border-color: lighten(@colVal,(100% - lightness(@colVal))/2);
-        box-shadow: 0px 0px 2px 0px lighten(@colVal,(100% - lightness(@colVal))/2);
+    .dream.button.@{curname}:hover {
+        background-color: lighten(@colVal, (100% - lightness(@colVal))/2);
+        border-color: lighten(@colVal, (100% - lightness(@colVal))/2);
+        box-shadow: 0px 0px 2px 0px lighten(@colVal, (100% - lightness(@colVal))/2);
     }
-    .dream.button.@{curname}:active{
-        background-color: darken(@colVal,(100% - lightness(@colVal))/2);
-        border-color: darken(@colVal,(100% - lightness(@colVal))/2);
+    .dream.button.@{curname}:active {
+        background-color: darken(@colVal, (100% - lightness(@colVal))/2);
+        border-color: darken(@colVal, (100% - lightness(@colVal))/2);
     }
     .GenerateButtons(@i+1);
-
 }
 
 
 /*BUTTONGROUPS*/
-.dream.buttons.left>.dream.button{
-    float:left;
+
+.dream.buttons.left>.dream.button {
+    float: left;
 }
-.dream.buttons.right>.dream.button{
-    float:right;
+
+.dream.buttons.right>.dream.button {
+    float: right;
 }
-.dream.buttons.vertical>.dream.button{
-    display:inline-block;
+
+.dream.buttons.vertical>.dream.button {
+    display: inline-block;
 }
+
+
 /**BACKHIDER**/
+
 .dream.backhider {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background-color: fade(@mainColor,lightness(@mainColor));
+    background-color: fade(@mainColor, lightness(@mainColor));
     top: 0px;
     left: 0px;
     position: absolute;
@@ -134,12 +154,14 @@
     opacity: 1;
 }
 
+
 /***PROMPT****/
+
 .dream.prompt {
     border-radius: 2px;
     border: 1px solid @mainColor;
     background-color: @mainColor;
-    box-shadow: 0px 0px 2px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 2px 0px darken(@mainColor, 20%);
     width: 50%;
     position: absolute;
     opacity: 0;
@@ -154,37 +176,40 @@
 }
 
 .dream.prompt:hover {
-    box-shadow: 0px 0px 14px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 14px 0px darken(@mainColor, 20%);
 }
 
 .dream.prompt>.text {
     font-size: 18px!important;
 }
-.dream.prompt.top{
-    top:0;
-}
-.dream.prompt.bottom{
-    bottom:0!important;
-        transform: translateY( 64px);
 
+.dream.prompt.top {
+    top: 0;
 }
+
+.dream.prompt.bottom {
+    bottom: 0!important;
+    transform: translateY( 64px);
+}
+
 .dream.prompt.open {
     transform: scaleY(1);
     transform: translateY(0);
     opacity: 1;
 }
 
+
 /********ASK*********/
+
 .dream.ask {
     border-radius: 2px;
     border: 1px solid @mainColor;
     background-color: @mainColor;
-    box-shadow: 0px 0px 2px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 2px 0px darken(@mainColor, 20%);
     width: 50%;
     position: absolute;
     opacity: 0;
     left: 25%;
-    top: 0;
     padding: 18px;
     padding-top: 6px;
     transform: scaleY(0);
@@ -194,7 +219,7 @@
 }
 
 .dream.ask:hover {
-    box-shadow: 0px 0px 14px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 14px 0px darken(@mainColor, 20%);
 }
 
 .dream.ask>.title {
@@ -212,13 +237,22 @@
     opacity: 1;
 }
 
+.dream.ask.top {
+    top: 0px!important;
+}
+
+.dream.ask.bottom {
+    bottom: 0!important;
+}
+
+
 /**********MESSAGE*********/
 
 .dream.message {
     border-radius: 2px;
     border: 1px solid @mainColor;
     background-color: @mainColor;
-    box-shadow: 0px 0px 2px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 2px 0px darken(@mainColor, 20%);
     width: 50%;
     position: absolute;
     opacity: 0;
@@ -233,7 +267,7 @@
 }
 
 .dream.message:hover {
-    box-shadow: 0px 0px 14px 0px darken(@mainColor,20%);
+    box-shadow: 0px 0px 14px 0px darken(@mainColor, 20%);
 }
 
 .dream.message>.title {
@@ -251,7 +285,9 @@
     opacity: 1;
 }
 
+
 /*****DIALOG*****/
+
 .dream.dialog {
     width: 75%;
     opacity: 0;
@@ -264,32 +300,37 @@
     transition-duration: 0.8s;
     transition: all 0.4s cubic-bezier(0, .67, .48, 1);
 }
-.dream.dialog.top{
-    top:0!important;
+
+.dream.dialog.top {
+    top: 0!important;
 }
-.dream.dialog.left{
-    width:25%;
-    top:12%;
-    height:75%;
+
+.dream.dialog.left {
+    width: 25%;
+    top: 12%;
+    height: 75%;
 }
-.dreamd.dialog.right{
-    right:0px;
+
+.dreamd.dialog.right {
+    right: 0px;
 }
-.dream.dialog.right{
+
+.dream.dialog.top {
+    top: 0px!important;
 }
-.dream.dialog.bottom{
+
+.dream.dialog.bottom {
     bottom: 0!important;
 }
-.dream.dialog.left{
-    left:0!important
-}
-.dream.dialog.right{
-    right:0!important;
+
+.dream.dialog.left {
+    left: 0!important
 }
 
 .dream.dialog:hover {
     box-shadow: 0px 0px 8px 0px #b9b9b9;
 }
+
 .dream.dialog.open {
     transform: scale(1);
     opacity: 1;
