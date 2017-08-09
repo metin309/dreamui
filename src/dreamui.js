@@ -363,4 +363,79 @@ function DreamUI() {
         new DreamUI().closeBackhider();
     }
 
+
+
+    //helpbar
+    this.helpbar = function (settings, onButtonClick) {
+        if (settings.position == undefined) {
+            settings.position = "bottom";
+        }
+        if (settings.buttonText == undefined) {
+            settings.buttonText = "DONE";
+        }
+        if (settings.duration == undefined) {
+            settings.duration = 3200;
+        }
+        var helpbar = document.createElement("div");
+        helpbar.className = "dream helpbar"
+        var doneButton = document.createElement("button");
+        doneButton.className = "dream transparent flat button right-floating";
+        doneButton.innerHTML = settings.buttonText;
+        var message = document.createElement("span");
+        message.className = "left-floating";
+        message.innerHTML = settings.message;
+
+        helpbar.appendChild(doneButton);
+        helpbar.appendChild(message);
+
+        if (settings.position == "bottom") {
+            helpbar.classList.add("bottom");
+        } else {
+            helpbar.classList.add("top");
+        }
+
+        if (document.querySelectorAll(".dream.helpbar").length > 0) {
+            var int;
+            int = setInterval(function () {
+                if (document.querySelectorAll(".dream.helpbar").length == 0) {
+                    document.body.appendChild(helpbar);
+                    clearInterval(int);
+                    setTimeout(function () {
+                        if (settings.duration != "infinite") {
+                            helpbar.style.cssText += "animation-fill-mode: backwards;";
+                            setTimeout(function () {
+                                helpbar.outerHTML = "";
+                            }, 400);
+                        }
+                    }, settings.duration);
+                }
+            }, 200);
+        } else {
+            document.body.appendChild(helpbar);
+
+            setTimeout(function () {
+                if (settings.duration != "infinite") {
+                    helpbar.style.cssText += "animation-fill-mode: backwards;";
+                    setTimeout(function () {
+                        helpbar.outerHTML = "";
+                    }, 400);
+                }
+            }, settings.duration);
+        }
+
+        doneButton.addEventListener("click", function () {
+            if (onButtonClick != undefined) {
+                onButtonClick();
+            }
+            helpbar.style.cssText += "animation-fill-mode: backwards;";
+            setTimeout(function () {
+                helpbar.outerHTML = "";
+            }, 400);
+            helpbar.style.cssText += "animation-fill-mode: backwards;";
+            setTimeout(function () {
+                helpbar.outerHTML = "";
+            }, 400);
+
+        });
+    }
 }

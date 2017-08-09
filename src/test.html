@@ -18,7 +18,7 @@
         <div id="panel" class="dream button">I will open a panel</div>
         <button id="prompt" class="dream button">Click me</button>
         <button id="dialogOpener" class="dream button green">green</button>
-        <button class="dream button red">red</button>
+        <button id="helpbar" class="dream button red transparent">I will open the helpbar</button>
         <button class="dream button yellow">yellow</button>
         <button class="dream button blue">blue</button>
 
@@ -49,6 +49,12 @@
         ui.togglePanel({
             backhider: false
         }, document.getElementById("panelCon"));
+    });
+    document.getElementById("helpbar").addEventListener("click", function() {
+        ui.helpbar({
+            position: "top",
+            message: "Helpbar test",
+        });
     });
     document.getElementById("prompt").addEventListener("click", function() {
         ui.prompt({

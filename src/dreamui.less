@@ -46,6 +46,14 @@ aqua;
     box-sizing: border-box;
 }
 
+.right-floating {
+    float: right;
+}
+
+.left-floating {
+    float: left
+}
+
 .flat {
     border-radius: 0!important;
 }
@@ -81,6 +89,17 @@ aqua;
     user-select: none;
 }
 
+.dream.transparent.button {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+    border: none;
+}
+
+.dream.basic.button {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+}
+
 .dream.button:hover {
     background-color: lighten(@mainColor, 3%);
     border-color: lighten(@mainColor, 3%);
@@ -108,6 +127,15 @@ aqua;
         box-shadow: 0px 0px 2px 0px darken(@colVal, 20%);
         transition-duration: 0.4s;
         cursor: default;
+    }
+    .dream.button.@{curname}.transparent {
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+        border: none;
+    }
+    .dream.basic.button.@{curname} {
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
     }
     .dream.button.@{curname}:hover {
         background-color: lighten(@colVal, (100% - lightness(@colVal))/2);
@@ -504,4 +532,33 @@ aqua;
     top: 0;
     float: left;
     transition: all 0.4s;
+}
+
+
+/**HELPBAR**/
+
+.dream.helpbar {
+    width: 100%;
+    left: 0px;
+    transition: all 0.4s;
+    background-color: @secondaryColor;
+    position: fixed;
+    animation: helpbarOpen 0.4s;
+    animation-fill-mode: forwards;
+}
+
+.dream.helpbar.bottom {
+    bottom: 0px;
+    transform: translateY(100%);
+}
+
+.dream.helpbar.top {
+    top: 0px;
+    transform: translateY(-100%);
+}
+
+@keyframes helpbarOpen {
+    to {
+        transform: translateY(0);
+    }
 }
