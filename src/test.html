@@ -13,33 +13,43 @@
 </head>
 
 <body>
-    <button id="prompt" class="dream button">Click me</button>
-    <button id="dialogOpener" class="dream button green">green</button>
-    <button class="dream button red">red</button>
-    <button class="dream button yellow">yellow</button>
-    <button class="dream button blue">blue</button>
+    <div id="panelCon" class="dream panel left">a</div>
+    <div class="dream page">
+        <div id="panel" class="dream button">I will open a panel</div>
+        <button id="prompt" class="dream button">Click me</button>
+        <button id="dialogOpener" class="dream button green">green</button>
+        <button class="dream button red">red</button>
+        <button class="dream button yellow">yellow</button>
+        <button class="dream button blue">blue</button>
 
-    <div id="dialog" class="dream dialog top">
-        <div class="title">Hello Dialog</div>
-        <div class="desc">This is a simple dialog of DreamUI</div>
-        <div class="dream buttons right">
-            <div id="closedi" class="dream button green">Okay</div>
-            <div class="dream button alert">Disagree</div>
+        <div id="dialog" class="dream dialog top">
+            <div class="title">Hello Dialog</div>
+            <div class="desc">This is a simple dialog of DreamUI</div>
+            <div class="dream buttons right">
+                <div id="closedi" class="dream button green">Okay</div>
+                <div class="dream button alert">Disagree</div>
+            </div>
         </div>
-    </div>
-    <div class="dream dropdown">
-        <div class="data">
-            <div class="item">Merhaba</div>
-            <div class="item">Do you love me :)</div>
-            <div class="item">I do alot :)</div>
-            <div class="item">Great ^^</div>
+        <div class="dream dropdown">
+            <div class="data">
+                <div class="item">Merhaba</div>
+                <div class="item">Do you love me :)</div>
+                <div class="item">I do alot :)</div>
+                <div class="item">Great ^^</div>
+            </div>
         </div>
+        <input type="text" class="dream input">
     </div>
-    <input type="text" class="dream input">
+
 </body>
 <script>
     var ui = new DreamUI();
     ui.Dropdown();
+    document.getElementById("panel").addEventListener("click", function() {
+        ui.togglePanel({
+            backhider: false
+        }, document.getElementById("panelCon"));
+    });
     document.getElementById("prompt").addEventListener("click", function() {
         ui.prompt({
             message: "Selam",

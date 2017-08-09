@@ -54,7 +54,98 @@ function DreamUI() {
         });
     }
 
+    this.openPanel = function (settings, panel) {
+        var position;
+        if (panel.classList.contains("left")) {
+            position = "left";
+        }
+        if (panel.classList.contains("right")) {
+            position = "right";
+        }
+        if (panel.classList.contains("top")) {
+            position = "top";
+        }
+        if (panel.classList.contains("bottom")) {
+            position = "bottom";
+        }
 
+        var page = document.querySelector(".dream.page");
+        switch (position) {
+            case "left":
+                panel.classList.add("open");
+                page.style.cssText += "margin-left:15%;";
+                console.log("a");
+                break;
+            case "top":
+                panel.classList.add("open");
+                page.style.cssText += "margin-top:7%;";
+                console.log("a");
+                break;
+            case "right":
+                panel.classList.add("open");
+                page.style.cssText += "margin-right:15%;";
+                console.log("a");
+                break;
+            case "bottom":
+                panel.classList.add("open");
+                page.style.cssText += "margin-bottom:7%;";
+                console.log("a");
+                break;
+        }
+        if (settings.backhider == true) {
+            new DreamUI().openBackhider(function () {
+                new DreamUI().closeBackhider();
+                new DreamUI().closePanel(panel);
+            });
+        }
+    }
+    this.closePanel = function (panel) {
+        var position;
+        if (panel.classList.contains("left")) {
+            position = "left";
+        }
+        if (panel.classList.contains("right")) {
+            position = "right";
+        }
+        if (panel.classList.contains("top")) {
+            position = "top";
+        }
+        if (panel.classList.contains("bottom")) {
+            position = "bottom";
+        }
+
+        var page = document.querySelector(".dream.page");
+        switch (position) {
+            case "left":
+                panel.classList.remove("open");
+                page.style.cssText += "margin-left:0;";
+                console.log("a");
+                break;
+            case "top":
+                panel.classList.remove("open");
+                page.style.cssText += "margin-top:0;";
+                console.log("a");
+                break;
+            case "right":
+                panel.classList.remove("open");
+                page.style.cssText += "margin-right:0;";
+                console.log("a");
+                break;
+            case "bottom":
+                panel.classList.remove("open");
+                page.style.cssText += "margin-bottom:0;";
+                console.log("a");
+                break;
+        }
+
+    }
+    this.togglePanel = function (settings, panel) {
+        if (panel.classList.contains("open")) {
+            new DreamUI().closePanel(panel);
+        } else {
+            new DreamUI().openPanel(settings, panel);
+        }
+    }
     this.openBackhider = function (onClick) {
         var backhider = document.createElement("div");
         if (document.getElementsByClassName("backhider").length < 0) {

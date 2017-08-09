@@ -1,7 +1,7 @@
 /***********DEFAULT VALUES**********/
 
 @mainColor: #eaeaea;
-@secondaryColor: #1d00ff;
+@secondaryColor: #c5c0ea;
 
 /*key values*/
 
@@ -432,4 +432,76 @@ aqua;
 
 .dream.dropdown>.data {
     display: none;
+}
+
+
+/*******PANELS******/
+
+.dream.panel {
+    background-color: @secondaryColor;
+    box-shadow: 0 0 4px 0px @secondaryColor;
+    position: fixed;
+    /*transition*/
+    transform-origin: left;
+    transition: all 0.4s;
+    z-index: 1001;
+}
+
+.dream.panel.left {
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 15%;
+    transform: translateX(-100%);
+}
+
+.dream.panel.right {
+    right: 0px;
+    top: 0px;
+    width: 15%;
+    height: 100%;
+    transform: translateX(100%);
+}
+
+.dream.panel.top {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 15%;
+    transform: translateY(-100%);
+}
+
+.dream.panel.bottom {
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 15%;
+    transform: translateY(100%);
+}
+
+.dream.panel.left.open {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.dream.panel.top.open {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dream.panel.bottom.open {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dream.panel.right.open {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.dream.page {
+    width: 85%;
+    top: 0;
+    float: left;
+    transition: all 0.4s;
 }
