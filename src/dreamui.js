@@ -28,12 +28,20 @@ function DreamUI() {
                     item.addEventListener("click", function () {
                         if (element.querySelector(".active") != undefined) {
                             element.getElementsByClassName("active")[0].innerHTML = dataItem.innerHTML;
+
+                            if (dataItem.getAttribute("value") != undefined) {
+                                element.setAttribute("value", dataItem.getAttribute("value"));
+                            }
                         } else {
                             var active = document.createElement("div");
                             active.className = "active"
 
                             active.innerHTML = dataItem.innerHTML;
                             element.appendChild(active);
+
+                            if (dataItem.getAttribute("value") != undefined) {
+                                element.setAttribute("value", dataItem.getAttribute("value"));
+                            }
                         }
                     });
 
@@ -379,7 +387,7 @@ function DreamUI() {
         var helpbar = document.createElement("div");
         helpbar.className = "dream helpbar"
         var doneButton = document.createElement("button");
-        doneButton.className = "dream transparent flat button right-floating";
+        doneButton.className = "dream transparent secondary flat button right-floating";
         doneButton.innerHTML = settings.buttonText;
         var message = document.createElement("span");
         message.className = "left-floating";

@@ -111,6 +111,28 @@ aqua;
     border-color: darken(@mainColor, (100% - lightness(@mainColor))/2);
 }
 
+
+/*secondary button*/
+
+.dream.button.secondary {
+    border: 1px solid @secondaryColor;
+    color: #585858;
+    font-weight: @buttonTextWeight;
+    padding: @buttonPadding;
+    background-color: @secondaryColor;
+}
+
+.dream.button.secondary:hover {
+    background-color: lighten(@secondaryColor, 3%);
+    border-color: lighten(@secondaryColor, 3%);
+    box-shadow: 0px 0px 2px 0px lighten(@secondaryColor, (100% - lightness(@secondaryColor))/2);
+}
+
+.dream.button.secondary:active {
+    background-color: darken(@secondaryColor, (100% - lightness(@secondaryColor))/2);
+    border-color: darken(@secondaryColor, (100% - lightness(@secondaryColor))/2);
+}
+
 .GenerateButtons(1);
 .GenerateButtons(@i) when (@i<=length(@colorNames)) {
     @curname: extract(@colorNames, @i);
