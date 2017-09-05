@@ -1,46 +1,65 @@
 function DreamUI() {
     this.Dropdown = function () {
-        document.querySelectorAll(".dream.dropdown").forEach(function (element) {
+        document.querySelectorAll(".dropdown").forEach(function (element) {
             var data = new Array();
 
             data = element.querySelectorAll(".data")[0].querySelectorAll(".item");
             console.log(element.offsetTop);
 
-            if (element.querySelector(".active") != undefined) {
-                element.querySelector(".active").innerHTML = data[0].innerHTML;
-            } else {
-                var active = document.createElement("div");
-                active.className = "active"
-                active.innerHTML = data[0].innerHTML;
-                element.appendChild(active);
+            //if there is no text class inside dropdown element
+            if (element.querySelector(".text") == undefined) {
+                if (element.querySelector(".active") != undefined) {
+                    element.querySelector(".active").innerHTML = data[0].innerHTML;
+                } else {
+                    var active = document.createElement("div");
+                    active.className = "active"
+                    active.innerHTML = data[0].innerHTML;
+                    element.appendChild(active);
+                }
             }
             element.addEventListener("click", function () {
                 var drop = document.createElement("div");
-                drop.className = "dream drop flat";
+                drop.className = "dream drop flat " + data[0].className.replace("data", "");
+
                 drop.style.top = (element.offsetTop + element.clientHeight + 4) + "px";
                 drop.style.left = element.offsetLeft + "px";
-
+                drop.style.minWidth = element.clientWidth + "px";
+                if (element.classList.contains("bar")) {
+                    drop.classList.add('dropdownbar');
+                }
                 data.forEach(function (dataItem) {
-                    var item = document.createElement("div");
+                    var item = document.createElement("a");
+                    item.attributes = dataItem.attributes;
+                    item.style.display = "block";
+                    item.style.textAlign = "left";
+                    item.style.textDecoration = "none";
                     item.className = "dream dropitem";
                     item.innerHTML = dataItem.innerHTML;
+
+                    if (element.classList.contains("bar")) {
+                        item.classList.add('dropdownbar');
+                    }
+
+                    //item.setAttribute('href', dataItem.getAttribute('href'));
                     drop.appendChild(item);
                     item.addEventListener("click", function () {
-                        if (element.querySelector(".active") != undefined) {
-                            element.getElementsByClassName("active")[0].innerHTML = dataItem.innerHTML;
+                        if (element.querySelector(".text") == undefined) {
+                            if (element.querySelector(".active") != undefined) {
+                                element.getElementsByClassName("active")[0].innerHTML = dataItem.innerHTML;
 
-                            if (dataItem.getAttribute("value") != undefined) {
-                                element.setAttribute("value", dataItem.getAttribute("value"));
-                            }
-                        } else {
-                            var active = document.createElement("div");
-                            active.className = "active"
+                                if (dataItem.getAttribute("value") != undefined) {
+                                    element.setAttribute("value", dataItem.getAttribute("value"));
+                                }
+                            } else {
+                                var active = document.createElement("div");
+                                active.className = "active"
 
-                            active.innerHTML = dataItem.innerHTML;
-                            element.appendChild(active);
+                                active.innerHTML = dataItem.innerHTML;
+                                element.appendChild(active);
 
-                            if (dataItem.getAttribute("value") != undefined) {
-                                element.setAttribute("value", dataItem.getAttribute("value"));
+                                if (dataItem.getAttribute("value") != undefined) {
+                                    element.setAttribute("value", dataItem.getAttribute("value"));
+                                }
                             }
                         }
                     });
@@ -446,4 +465,25 @@ function DreamUI() {
 
         });
     }
+
+    /*COMPACT BAR*/
+    window.addEventListener("scroll", function () {
+        console.log(document.documentElement.scrollTop);
+        var bar = document.querySelector(".dream.bar.compact");
+        if (bar != undefined) {
+            if (document.documentElement.scrollTop > 100 || document.body.scrollTop) {
+                bar.classList.remove("large");
+            } else {
+                bar.classList.add("large");
+
+            }
+        }
+    });
+
+    /*bug fixing*/
+    document.querySelectorAll(".dream.bar.compact").forEach(function (bar) {
+        if (!bar.classList.contains("large")) {
+            bar.classList.add("large");
+        }
+    });
 }

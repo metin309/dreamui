@@ -15,6 +15,10 @@
 @buttonBorderWidth: 1px;
 @buttonTextWeight: 600;
 
+/*bar settings*/
+
+@barThickness: 2em;
+
 /**********COLORS**********/
 
 @colorNames: green,
@@ -452,20 +456,19 @@ aqua;
     box-shadow: 0px 0px 2px 0px #b9b9b9;
     transition-duration: 0.4s;
     cursor: default;
-    transform: scale(0);
+    transform: scaleY(0);
     transform-origin: top left;
     opacity: 0;
 }
 
 .dream.drop.open {
-    transform: scale(1);
+    transform: scaleY(1);
     opacity: 1;
 }
 
 .dream.dropitem {
-    text-align: center;
     color: #585858;
-    font-size: 12px;
+    font-size: 13px;
     padding: 2px;
     background-color: #eaeaea;
     transition-duration: 0.4s;
@@ -480,8 +483,82 @@ aqua;
     background-color: #dfdfdf;
 }
 
-.dream.dropdown>.data {
+.dropdown>.data {
     display: none;
+}
+
+.GenerateDropdowns(1);
+.GenerateDropdowns(@i) when (@i<=length(@colorNames)) {
+    @curname: extract(@colorNames, @i);
+    @colVal: extract(@colorValues, @i);
+    .dream.drop.@{curname} {
+        width: 128px;
+        text-align: center;
+        border-radius: 2px;
+        border: 1px solid @colVal;
+        color: #585858;
+        font-weight: @buttonTextWeight;
+        padding: @buttonPadding;
+        background-color: @colVal;
+        box-shadow: 0px 0px 2px 0px darken(@colVal, 20%);
+        transition-duration: 0.4s;
+        cursor: default;
+    }
+    .dream.dropitem.@{curname} {
+        font-size: 13px;
+        padding: 2px;
+        background-color: @colVal;
+        transition-duration: 0.4s;
+        cursor: default;
+    }
+    .dream.dropitem.@{curname}:hover {
+        background-color: lighten(@colVal, (100% - lightness(@colVal))/2);
+        border-color: lighten(@colVal, (100% - lightness(@colVal))/2);
+        box-shadow: 0px 0px 2px 0px lighten(@colVal, (100% - lightness(@colVal))/2);
+    }
+    .dream.dropitem.@{curname}:active {
+        background-color: darken(@colVal, (100% - lightness(@colVal))/2);
+        border-color: darken(@colVal, (100% - lightness(@colVal))/2);
+    }
+    .GenerateButtons(@i+1);
+}
+
+//for bars, it will color differently
+.dream.drop.dropdownbar {
+    position: absolute;
+    border: 1px solid @secondaryColor;
+    color: #585858;
+    font-weight: 600;
+    padding: 4px 0 4px 0;
+    background-color: @secondaryColor;
+    box-shadow: 0px 0px 2px 0px darken(@secondaryColor, 20%);
+    transition-duration: 0.4s;
+    cursor: default;
+    transform: scaleY(0);
+    transform-origin: top left;
+    opacity: 0;
+}
+
+.dream.drop.open.dropdownbar {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.dream.dropitem.dropdownbar {
+    color: #585858;
+    font-size: 13px;
+    padding: 2px;
+    background-color: @secondaryColor;
+    transition-duration: 0.4s;
+    cursor: default;
+}
+
+.dream.dropitem.dropdownbar:hover {
+    background-color: lighten(@secondaryColor, 3%);
+}
+
+.dream.dropitem.dropdownbar:active {
+    background-color: darken(@secondaryColor, (100% - lightness(@secondaryColor))/2);
 }
 
 
@@ -567,6 +644,7 @@ aqua;
     position: fixed;
     animation: helpbarOpen 0.4s;
     animation-fill-mode: forwards;
+    z-index: 3000; //most top
 }
 
 .dream.helpbar.bottom {
@@ -583,4 +661,64 @@ aqua;
     to {
         transform: translateY(0);
     }
+}
+
+
+/****BAR*****/
+
+.dream.bar {
+    width: 100%;
+    height: @barThickness;
+    background-color: @secondaryColor;
+    position: fixed;
+    box-shadow: 0 0 2px 0px @secondaryColor;
+    transition: all 0.4s;
+    z-index: 3000; //most top
+}
+
+.dream.bar.top {
+    top: 0px;
+    left: 0px;
+}
+
+.dream.bar.solid {
+    margin-bottom: @barThickness;
+}
+
+.dream.bar.large {
+    height: @barThickness*2;
+}
+
+
+/*BAR ITEMS*/
+
+.dream.bar>.item {
+    height: 100%;
+    float: left;
+    background-color: @secondaryColor;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 0 8px 0 8px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.4s;
+}
+
+.dream.bar>.item:hover {
+    float: left;
+    background-color: lighten(@secondaryColor, 3%);
+}
+
+.dream.bar>.item:active {
+    float: left;
+    background-color: darken(@secondaryColor, (100% - lightness(@secondaryColor))/2);
+}
+
+.dream.bar>.item.right {
+    float: right;
 }
